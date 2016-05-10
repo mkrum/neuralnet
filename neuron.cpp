@@ -7,22 +7,23 @@ double sigmoid(double);
 double sigmoidDer(double);
 
 Neuron::Neuron(int size){
-    std::default_random_engine gen;
+    std::random_device r;
+    std::default_random_engine gen(r());
     std::uniform_real_distribution<double> dist(0, 1);
     for(int i = 0; i < size; i++){
         weights.push_back(dist(gen));
     }
-    error = weights;
-    inputs = error;
+    error.reserve(size);
+    inputs.reserve(size);
     bias = dist(gen);
     _activation = &sigmoid;
     _activationDer = &sigmoidDer;
-    stepSize = .05;
+    stepSize = .1;
 }
 
 double Neuron::feedForward(vector<double> ins){
     inputs = ins;
-    double sum;
+    double sum = 0;
     for(int i = 0; i < weights.size(); i++){
         sum += inputs[i] * weights[i];
     }
@@ -30,7 +31,7 @@ double Neuron::feedForward(vector<double> ins){
     return output;
 }
 
-vector<double> Neuron::backProp(double inError){
+vector<double> Neuron::backPropagate(double inError){
     for(int i = 0; i < weights.size(); i++){
         error[i] = inError * _activationDer(output) * weights[i];
         weights[i] -= inError * _activationDer(output) * inputs[i]; 

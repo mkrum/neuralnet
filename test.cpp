@@ -1,16 +1,22 @@
 //Testing the neuron
 //mkrum
 
-#include "Neuron.h"
+#include "network.h"
 #include <iostream>
 #include <vector>
+#include <cmath>
 
 using namespace std;
 
 int main(){
-    Neuron test = Neuron(1);
+    Network test = Network(2, 2);
     vector<double> temp;
     temp.push_back(.5);
-    std::cout << test.feedForward(temp) << std::endl;    
-
+    temp.push_back(.6);
+    std::cout << test.feedForward(temp) << std::endl; 
+    for(int i = 0; i < 10000; i++){
+        test.backPropagate(.75);
+        test.feedForward(temp);
+    }
+    std::cout << test.feedForward(temp) << std::endl; 
 }

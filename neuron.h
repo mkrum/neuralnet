@@ -14,7 +14,7 @@ class Neuron {
     public:
         Neuron(int);
         double feedForward(vector<double>);
-        vector<double> backProp(double);
+        vector<double> backPropagate(double);
     private:
         vector<double> weights;
         vector<double> error;
