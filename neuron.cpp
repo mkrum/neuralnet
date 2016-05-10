@@ -36,6 +36,7 @@ vector<double> Neuron::backPropagate(double inError){
         error[i] = inError * _activationDer(output) * weights[i];
         weights[i] -= inError * _activationDer(output) * inputs[i]; 
     }
+    bias -= inError * _activationDer(output) * bias;
     return error;
 }
  
