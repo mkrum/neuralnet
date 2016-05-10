@@ -2,6 +2,7 @@
 // mkrum
 
 #include "network.h"
+#include <iostream>
 
 Network::Network(int length, int width): output(width){
     for(int i = 0; i < length; i++){
@@ -10,8 +11,8 @@ Network::Network(int length, int width): output(width){
 }
 
 double Network::feedForward(vector<double> inputs){
-    for(auto & lay : layers){
-        inputs = lay.feedForward(inputs);
+    for(int i = 0; i < layers.size(); i++){
+        inputs = layers[i].feedForward(inputs);
     }
     out = output.feedForward(inputs);
     return out;

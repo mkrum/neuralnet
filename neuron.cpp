@@ -34,9 +34,9 @@ double Neuron::feedForward(vector<double> ins){
 vector<double> Neuron::backPropagate(double inError){
     for(int i = 0; i < weights.size(); i++){
         error[i] = inError * _activationDer(output) * weights[i];
-        weights[i] -= inError * _activationDer(output) * inputs[i]; 
+        weights[i] -= stepSize * inError * _activationDer(output) * inputs[i]; 
     }
-    bias -= inError * _activationDer(output) * bias;
+    bias -= stepSize* inError * _activationDer(output) * bias;
     return error;
 }
  
