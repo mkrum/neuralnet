@@ -13,11 +13,11 @@ Layer::Layer(int size){
 }
 
 vector<double> Layer::feedForward(vector<double> inputs){
-    vector<double> temp;
+    output.erase(output.begin(), output.end());
     for(int i = 0; i < layer.size(); i++){
-        temp.push_back(layer[i].feedForward(inputs));
+        output.push_back(layer[i].feedForward(inputs));
     }
-    return temp;
+    return output;
 }
 
 vector<double> Layer::backPropagate(vector<double> inError){

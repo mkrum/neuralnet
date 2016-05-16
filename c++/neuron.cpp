@@ -18,7 +18,7 @@ Neuron::Neuron(int size){
     bias = dist(gen);
     _activation = &sigmoid;
     _activationDer = &sigmoidDer;
-    stepSize = .1;
+    stepSize = .7;
 }
 
 double Neuron::feedForward(vector<double> ins){
