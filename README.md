@@ -1,1 +1,1 @@
-Simple practice neural network
+Neural Networks in a few languages, practice
