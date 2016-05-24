@@ -1,0 +1,1 @@
+test: *.scala ; scalac *.scala

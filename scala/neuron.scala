@@ -1,13 +1,13 @@
 package neuron
 
-abstract class Neuron(size : Int, val stepSize : Double){
+abstract class Neuron(val size : Int, val stepSize : Double){
   val r = new util.Random
-  var bias = r.nextFloat
+  var bias : Double = r.nextFloat
   var weights : Array[Double] = Array.fill(size)(r.nextFloat)
-  def activation(x : Double) : Double = x;
-  def activationDer(y: Double) : Double = y;
-  var output : Double = _;
-  var inputs : Array[Double] =  _;
+  def activation(x : Double) : Double = x
+  def activationDer(y: Double) : Double = y
+  var output : Double = _
+  var inputs : Array[Double] = _
   def feedForward(ins: Array[Double]) : Double = {
     var sum : Double = 0;
     inputs = ins;
@@ -16,8 +16,9 @@ abstract class Neuron(size : Int, val stepSize : Double){
     output
   }
   def backPropagate(error : Double) : Array[Double] = {
-    var errors = (inputs, weights).zipped.map{ (i : Double, w : Double) => (error * activationDer(output) * w , w  - stepSize * error * activationDer(output) * i)};
-    weights = errors.map{ case (i, w) => w};
-    errors.map{ case (i,w) => i}
-  }  
+    println(inputs(0));
+    (inputs, weights).zipped.map{(i, w) => w  - stepSize * error * activationDer(output) * i};
+    bias = bias - stepSize * error * activationDer(output);
+    weights.map{w => error * activationDer(output) * w;}
+  } 
 }
